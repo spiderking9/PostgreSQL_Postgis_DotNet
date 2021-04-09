@@ -1,0 +1,121 @@
+﻿@model IEnumerable<Points>
+@*@model String*@
+@{
+    ViewData["Title"] = "Home Page - map";
+}
+<link rel="stylesheet" href="~/lib/v6.5.0-dist/ol.css">
+<style>
+    .map {
+        height: 700px;
+        width: 100%;
+    }
+
+</style>
+<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
+
+
+<div id="js-map" class="map"></div>
+
+
+<script>
+    window.onload = init;
+    function init() {
+
+
+        var styleWojewodztwo = function (myColor) {
+            return new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: 2,
+                    stroke: new ol.style.Stroke({ color: myColor, width: 1 }),
+                })
+            })
+        }
+
+        var styles = {
+            'podkarpackie': styleWojewodztwo("blue"),
+            'mazowieckie': styleWojewodztwo("red"),
+            'opolskie': styleWojewodztwo("pink"),
+            'dolnośląskie': styleWojewodztwo("green"),
+            'wielkopolskie': styleWojewodztwo("yellow"),
+            'małopolskie': styleWojewodztwo("orange"),
+            'kujawsko-pomorskie': styleWojewodztwo("orange"),
+            'lubelskie': styleWojewodztwo("brown"),
+            'łódzkie': styleWojewodztwo("purple"),
+            'lubuskie': styleWojewodztwo("silver"),
+            'podlaskie': styleWojewodztwo("ivory"),
+            'pomorskie': styleWojewodztwo("black"),
+            'śląskie': styleWojewodztwo("black"),
+            'świętokrzyskie': styleWojewodztwo("white"),
+            'warmińsko-mazurskie': styleWojewodztwo("pink"),
+            'zachodniopomorskie': styleWojewodztwo("blue")
+        }
+
+        var myJson =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model, Newtonsoft.Json.Formatting.Indented));
+
+        var geojsonObject = {
+            'type': 'FeatureCollection',
+            'crs': {
+                        'type': 'name',
+                'properties': {
+                            'name': 'EPSG:3857',
+                },
+            },
+            'features': [
+            ]
+        }
+
+        //send cord from Model to json
+        for (var i = 1; i < myJson.length; i++) {
+            var www = {
+                'type': 'Feature',
+                "properties": { "SD_NAME": myJson[i].Wojewodztwo},
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [myJson[i].X, myJson[i].Y]
+                },
+            }
+            geojsonObject['features'].push(www)
+        }
+
+        var styleFunction = function (feature) {
+            return styles[feature.get('SD_NAME')];
+        }
+
+        var vectorSource = new ol.source.Vector({
+            features: new ol.format.GeoJSON().readFeatures(geojsonObject),
+        })
+
+        var vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+            style: styleFunction,
+        })
+
+        var SourceTest = new ol.layer.Tile({
+            source: new ol.source.TileWMS({
+                url: 'http://localhost:8081/geoserver/localhost/wms',
+                params: {
+            'LAYERS': 'localhost:Wojewodztwa',
+                    'version': '1.1.0',
+                    'format': 'image/png',
+                    'width': 768,
+                    'height': 714,
+                    'STYLES': [],
+                    'EPSG': 3857,
+                    'TILED': true
+                },
+                serverType: 'geoserver'
+            })
+        })
+        const map = new ol.Map({
+            view: new ol.View({
+                center: [400000, 420000],
+                zoom: 7
+            }),
+            target: 'js-map'
+        })
+        map.addLayer(SourceTest);
+        map.addLayer(vectorLayer);
+    }
+
+</script>
+<script src="~/lib/v6.5.0-dist/ol.js"></script>

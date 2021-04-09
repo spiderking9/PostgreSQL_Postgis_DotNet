@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Points>
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<div>@ViewBag.Zbazy</div>
+
+<table class="table">
+    <tr>
+        <th>X</th>
+        <th>Y</th>
+        <th>Z</th>
+        <th>Wojewodztwo</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.X
+            </td>
+            <td>
+                @item.Y
+            </td>
+            <td>
+                @item.Z
+            </td>
+            <td>
+                @item.Wojewodztwo
+            </td>
+        </tr>
+    }
+
+</table>

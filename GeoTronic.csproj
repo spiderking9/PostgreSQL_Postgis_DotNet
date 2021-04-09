@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\Addr.cs" />
+    <Compile Remove="Models\Addrfeat.cs" />
+    <Compile Remove="Models\Bg.cs" />
+    <Compile Remove="Models\County.cs" />
+    <Compile Remove="Models\CountyLookup.cs" />
+    <Compile Remove="Models\CountysubLookup.cs" />
+    <Compile Remove="Models\Cousub.cs" />
+    <Compile Remove="Models\DirectionLookup.cs" />
+    <Compile Remove="Models\Edges.cs" />
+    <Compile Remove="Models\Faces.cs" />
+    <Compile Remove="Models\Featnames.cs" />
+    <Compile Remove="Models\GeocodeSettings.cs" />
+    <Compile Remove="Models\GeocodeSettingsDefault.cs" />
+    <Compile Remove="Models\Layer.cs" />
+    <Compile Remove="Models\LoaderLookuptables.cs" />
+    <Compile Remove="Models\LoaderPlatform.cs" />
+    <Compile Remove="Models\LoaderVariables.cs" />
+    <Compile Remove="Models\PagcGaz.cs" />
+    <Compile Remove="Models\PagcLex.cs" />
+    <Compile Remove="Models\PagcRules.cs" />
+    <Compile Remove="Models\Place.cs" />
+    <Compile Remove="Models\PlaceLookup.cs" />
+    <Compile Remove="Models\PointcloudFormats.cs" />
+    <Compile Remove="Models\postgis_31_sampleContext.cs" />
+    <Compile Remove="Models\SecondaryUnitLookup.cs" />
+    <Compile Remove="Models\State.cs" />
+    <Compile Remove="Models\StateLookup.cs" />
+    <Compile Remove="Models\StreetTypeLookup.cs" />
+    <Compile Remove="Models\Tabblock.cs" />
+    <Compile Remove="Models\Topology.cs" />
+    <Compile Remove="Models\Tract.cs" />
+    <Compile Remove="Models\Wojewodztwa.cs" />
+    <Compile Remove="Models\Zcta5.cs" />
+    <Compile Remove="Models\ZipLookup.cs" />
+    <Compile Remove="Models\ZipLookupBase.cs" />
+    <Compile Remove="Models\ZipState.cs" />
+    <Compile Remove="Models\ZipStateLoc.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EntityFramework.Metadata" Version="1.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Npgsql" Version="6.0.0-preview2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
+    <PackageReference Include="SharpMap" Version="1.0.4.1" />
+    <PackageReference Include="SharpMap.Extensions" Version="1.2.0" />
+    <PackageReference Include="SharpMap.UI" Version="1.2.0" />
+    <PackageReference Include="SharpMap.Web" Version="1.2.0" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+  </ItemGroup>
+
+</Project>
